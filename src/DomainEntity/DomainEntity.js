@@ -88,9 +88,7 @@ class Domain{
    
 
     validate(){
-        if(this.#arrayForErrors.length==0){
-            return "--no errors are found--";
-        }else{
+        if(this.#arrayForErrors.length!=0){
             return this.#arrayForErrors;
         }
     }
