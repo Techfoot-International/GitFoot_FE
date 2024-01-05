@@ -294,11 +294,8 @@ class Domain{
 
 
     #validateDatatypes_for_validateColumns(numOfObjects, notObjects){
-        var breakForLoop=true;
-        if(numOfObjects.length == 0 && notObjects.length == 0){
-            this.#arrayForErrors.push("error: 'columns' array is empty")
-        }//if numOfObjects and notObjects.length is equal to 0
-        else if(numOfObjects.length==0){
+        
+        if(numOfObjects.length==0){
             this.#arrayForErrors.push(`error: all elements of 'columns' array have invalid datatypes`)
         }//if numOfObjects is equal to 0
         else if(numOfObjects.length == this.columns.length){
