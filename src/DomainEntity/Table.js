@@ -24,27 +24,32 @@ class Table {
 
 
     validateColumns(){
-        if(Array.isArray(this.columns)=== true){
-            if(this.columns.length==0){
-                this.#arrayForErrors.push("error: 'columns' array is empty");
-            }//if this.columns.length is equal to 0 
-            else{
-                var numOfObjects=[];
-                var notObjects=[];
-                for(let i=0; i < this.columns.length; i++){
-                    if(typeof this.columns[i]== "object"){
-                        numOfObjects.push(i); //storing this,columns array indexes where there's an object.
-                    }
-                    else{
-                        notObjects.push(i); //storing this.columns array indexes where there isn't an object
-                    }
-                }//looping through this.columns[] for object
-
-                this.#validateDatatypes_for_validateColumns(numOfObjects,notObjects)
-            }//else
-        }//if this.columns is an Array
+        if(this.columns==undefined){
+            this.#arrayForErrors.push("error: no value given to 'columns'")
+        }
         else{
-            this.#arrayForErrors.push("error: 'columns' should be an array")
+            if(Array.isArray(this.columns)=== true){
+                if(this.columns.length==0){
+                    this.#arrayForErrors.push("error: 'columns' array is empty");
+                }//if this.columns.length is equal to 0 
+                else{
+                    var numOfObjects=[];
+                    var notObjects=[];
+                    for(let i=0; i < this.columns.length; i++){
+                        if(typeof this.columns[i]== "object"){
+                            numOfObjects.push(i); //storing this,columns array indexes where there's an object.
+                        }
+                        else{
+                            notObjects.push(i); //storing this.columns array indexes where there isn't an object
+                        }
+                    }//looping through this.columns[] for object
+
+                    this.#validateDatatypes_for_validateColumns(numOfObjects,notObjects)
+                }//else
+            }//if this.columns is an Array
+            else{
+                this.#arrayForErrors.push("error: 'columns' should be an array")
+            }
         }
     }
 
@@ -107,6 +112,9 @@ class Table {
 
 
     validate(){
+        this.validateName()
+        this.validateDescription()
+        this.validateColumns()
         if(this.#arrayForErrors.length!=0){
             return this.#arrayForErrors;
         }
