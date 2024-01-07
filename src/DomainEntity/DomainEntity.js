@@ -15,79 +15,102 @@ class Domain{
     }
 
     validateSelectedTables(){
-        if(Array.isArray(this.selectedTables) != true){
-            
-            this.#arrayForErrors.push("error: 'selectedTables' should be an array")
-        
-        }//if this.selectedTables is not an array 
-        else if(this.selectedTables.length == 0){
-            
-            this.#arrayForErrors.push("error: 'selectedTables' array is empty")
-
-        }//if this.selected.length is equal to 0
+        if(this.selectedTables==undefined){
+            this.#arrayForErrors.push("error: no value given to 'selectedTables'")
+        }
         else{
+            if(Array.isArray(this.selectedTables) != true){
+                
+                this.#arrayForErrors.push("error: 'selectedTables' should be an array")
+            
+            }//if this.selectedTables is not an array 
+            else if(this.selectedTables.length == 0){
+                
+                this.#arrayForErrors.push("error: 'selectedTables' array is empty")
 
-            for(let i=0; i < this.selectedTables.length; i++){
-                if(typeof this.selectedTables[i] !== "string"){
-                    this.#arrayForErrors.push(`error: 'selectedTables[${i}]' has invalid datatype`)
+            }//if this.selected.length is equal to 0
+            else{
+
+                for(let i=0; i < this.selectedTables.length; i++){
+                    if(typeof this.selectedTables[i] !== "string"){
+                        this.#arrayForErrors.push(`error: 'selectedTables[${i}]' has invalid datatype`)
+                    }
                 }
-            }
-        }//else
+            }//else
+        }
     } //validateSelectedTables()
 
     validateColumns(){
-        if(Array.isArray(this.columns)=== true){
-            if(this.columns.length==0){
-                this.#arrayForErrors.push("error: 'columns' array is empty");
-            }//if this.columns.length is equal to 0 
-            else{
-                var numOfObjects=[];
-                var notObjects=[];
-                for(let i=0; i < this.columns.length; i++){
-                    if(typeof this.columns[i]== "object"){
-                        numOfObjects.push(i); //storing this,columns array indexes where there's an object.
-                    }
-                    else{
-                        notObjects.push(i); //storing this.columns array indexes where there isn't an object
-                    }
-                }//looping through this.columns[] for object
-               
-                this.#validateDatatypes_for_validateColumns(numOfObjects,notObjects)
-            }//else
-        }//if this.columns is an Array
-        else{
-            this.#arrayForErrors.push("error: 'columns' should be an array")
+        if(this.columns==undefined){
+            this.#arrayForErrors.push("error: no value given to 'columns'")
         }
-    }
+        else{
+            if(Array.isArray(this.columns)=== true){
+                if(this.columns.length==0){
+                    this.#arrayForErrors.push("error: 'columns' array is empty");
+                }//if this.columns.length is equal to 0 
+                else{
+                    var numOfObjects=[];
+                    var notObjects=[];
+                    for(let i=0; i < this.columns.length; i++){
+                        if(typeof this.columns[i]== "object"){
+                            numOfObjects.push(i); //storing this,columns array indexes where there's an object.
+                        }
+                        else{
+                            notObjects.push(i); //storing this.columns array indexes where there isn't an object
+                        }
+                    }//looping through this.columns[] for object
+                
+                    this.#validateDatatypes_for_validateColumns(numOfObjects,notObjects)
+                }//else
+            }//if this.columns is an Array
+            else{
+                this.#arrayForErrors.push("error: 'columns' should be an array")
+            }//else
+        
+        }//else
+
+    }//validateColumns()
 
     validateMethods(){
-        if(Array.isArray(this.methods)=== true){
-            if(this.methods.length ==0){
-                this.#arrayForErrors.push("error: 'methods' array is empty")
-            }//if this.methods.length is equal to 0
-            else{
-                var numOfObjects=[];
-                var notObjects=[];
-                for(let i=0; i < this.methods.length; i++){
-                    if(typeof this.methods[i] == "object"){
-                        numOfObjects.push(i);
-                    }
-                    else{
-                        notObjects.push(i);
-                    }     
-                }//looping through this.methods[] for object
-
-                this.#validateDatatypes_for_validateMethods(numOfObjects, notObjects)
-            }//else
-        }//if this.methods is an Array
-        else{
-            this.#arrayForErrors.push("error: 'methods' should be an array")
+        if(this.methods==undefined){
+            this.#arrayForErrors.push("error: no value given to 'methods'")
         }
-    }
+        else{
+            if(Array.isArray(this.methods)=== true){
+                if(this.methods.length ==0){
+                    this.#arrayForErrors.push("error: 'methods' array is empty")
+                }//if this.methods.length is equal to 0
+                else{
+                    var numOfObjects=[];
+                    var notObjects=[];
+                    for(let i=0; i < this.methods.length; i++){
+                        if(typeof this.methods[i] == "object"){
+                            numOfObjects.push(i);
+                        }
+                        else{
+                            notObjects.push(i);
+                        }     
+                    }//looping through this.methods[] for object
+
+                    this.#validateDatatypes_for_validateMethods(numOfObjects, notObjects)
+                }//else
+            }//if this.methods is an Array
+            else{
+                this.#arrayForErrors.push("error: 'methods' should be an array")
+            }//else
+        
+        }//else
+    
+    }//validateMethods()
 
    
 
     validate(){
+        this.validateName()
+        this.validateSelectedTables()
+        this.validateColumns()
+        this.validateMethods()
         if(this.#arrayForErrors.length!=0){
             return this.#arrayForErrors;
         }
