@@ -1,8 +1,7 @@
 class Domain{
     name;
-    columns;
+    properties;
     methods;
-    selectedTables;
     #arrayForErrors=[];
 
     validateName(){
@@ -14,63 +13,38 @@ class Domain{
         }
     }
 
-    validateSelectedTables(){
-        if(this.selectedTables==undefined){
-            this.#arrayForErrors.push("error: no value given to 'selectedTables'")
+
+    validateProperties(){
+        if(this.properties==undefined){
+            this.#arrayForErrors.push("error: no value given to 'properties'")
         }
         else{
-            if(Array.isArray(this.selectedTables) != true){
-                
-                this.#arrayForErrors.push("error: 'selectedTables' should be an array")
-            
-            }//if this.selectedTables is not an array 
-            else if(this.selectedTables.length == 0){
-                
-                this.#arrayForErrors.push("error: 'selectedTables' array is empty")
-
-            }//if this.selected.length is equal to 0
-            else{
-
-                for(let i=0; i < this.selectedTables.length; i++){
-                    if(typeof this.selectedTables[i] !== "string"){
-                        this.#arrayForErrors.push(`error: 'selectedTables[${i}]' has invalid datatype`)
-                    }
-                }
-            }//else
-        }
-    } //validateSelectedTables()
-
-    validateColumns(){
-        if(this.columns==undefined){
-            this.#arrayForErrors.push("error: no value given to 'columns'")
-        }
-        else{
-            if(Array.isArray(this.columns)=== true){
-                if(this.columns.length==0){
-                    this.#arrayForErrors.push("error: 'columns' array is empty");
-                }//if this.columns.length is equal to 0 
+            if(Array.isArray(this.properties)=== true){
+                if(this.properties.length==0){
+                    this.#arrayForErrors.push("error: 'properties' array is empty");
+                }//if this.properties.length is equal to 0 
                 else{
                     var numOfObjects=[];
                     var notObjects=[];
-                    for(let i=0; i < this.columns.length; i++){
-                        if(typeof this.columns[i]== "object"){
-                            numOfObjects.push(i); //storing this,columns array indexes where there's an object.
+                    for(let i=0; i < this.properties.length; i++){
+                        if(typeof this.properties[i]== "object"){
+                            numOfObjects.push(i); //storing this.properties array indexes where there's an object.
                         }
                         else{
-                            notObjects.push(i); //storing this.columns array indexes where there isn't an object
+                            notObjects.push(i); //storing this.properties array indexes where there isn't an object
                         }
-                    }//looping through this.columns[] for object
+                    }//looping through this.properties[] for object
                 
-                    this.#validateDatatypes_for_validateColumns(numOfObjects,notObjects)
+                    this.#validateDatatypes_for_validateProperties(numOfObjects,notObjects)
                 }//else
-            }//if this.columns is an Array
+            }//if this.properties is an Array
             else{
-                this.#arrayForErrors.push("error: 'columns' should be an array")
+                this.#arrayForErrors.push("error: 'properties' should be an array")
             }//else
         
         }//else
 
-    }//validateColumns()
+    }//validateproperties()
 
     validateMethods(){
         if(this.methods==undefined){
@@ -108,8 +82,7 @@ class Domain{
 
     validate(){
         this.validateName()
-        this.validateSelectedTables()
-        this.validateColumns()
+        this.validateProperties()
         this.validateMethods()
         if(this.#arrayForErrors.length!=0){
             return this.#arrayForErrors;
@@ -287,27 +260,32 @@ class Domain{
     #loop_Through_inputParams_Repetition(numOfObjects, i, TotalObjects){
         for(let x=0;x < TotalObjects.length; x++){
                     
-            if(this.methods[numOfObjects[i]].inputParams[TotalObjects[x]].name == undefined && this.methods[numOfObjects[i]].inputParams[TotalObjects[x]].type == undefined){
-                this.#arrayForErrors.push(`error: 'methods[${numOfObjects[i]}].inputParams[${TotalObjects[x]}].name' AND 'methods[${numOfObjects[i]}].inputParams[${TotalObjects[x]}].type' are undefined`)
+            if(this.methods[numOfObjects[i]].inputParams[TotalObjects[x]].position == undefined && this.methods[numOfObjects[i]].inputParams[TotalObjects[x]].type == undefined){
+                this.#arrayForErrors.push(`error: 'methods[${numOfObjects[i]}].inputParams[${TotalObjects[x]}].position' AND 'methods[${numOfObjects[i]}].inputParams[${TotalObjects[x]}].type' are undefined`)
             }//if this.methods[].inputParams.name AND this.methods[].type is undefined
             
-            else if(this.methods[numOfObjects[i]].inputParams[TotalObjects[x]].name != undefined && this.methods[numOfObjects[i]].inputParams[TotalObjects[x]].type ==undefined){
+            else if(this.methods[numOfObjects[i]].inputParams[TotalObjects[x]].position != undefined && this.methods[numOfObjects[i]].inputParams[TotalObjects[x]].type ==undefined){
                 this.#arrayForErrors.push(`error: 'methods[${numOfObjects[i]}].inputParams[${TotalObjects[x]}].type' is undefined`)
-                if(typeof this.methods[numOfObjects[i]].inputParams[TotalObjects[x]].name !="strings"){
-                    this.#arrayForErrors.push(`error: 'methods[${numOfObjects[i]}].inputParams[${TotalObjects[x]}].name' has invalid datatype`)
+                if(Number.isInteger(this.methods[numOfObjects[i]].inputParams[TotalObjects[x]].position) !=true){
+                    this.#arrayForErrors.push(`error: 'methods[${numOfObjects[i]}].inputParams[${TotalObjects[x]}].position' has invalid datatype`)
                 }//if datatype of this.methods[].inputParams[].name is invalid
            
             }//if this.methods[].inputParams[].type is undefined
-            else if(typeof this.methods[numOfObjects[i]].inputParams[TotalObjects[x]].name != undefined && typeof this.methods[i].inputParams[TotalObjects[x]].type != undefined){
 
-                if(typeof this.methods[numOfObjects[i]].inputParams[TotalObjects[x]].name !== "string" && typeof this.methods[numOfObjects[i]].inputParams[TotalObjects[x]].type !== "string"){
-                    this.#arrayForErrors.push(`error: 'methods[${numOfObjects[i]}].inputParams[${TotalObjects[x]}].name' AND 'methods[${numOfObjects[i]}].inputParams[${TotalObjects[x]}].type' have invalid datatypes`)
+            else if(this.methods[numOfObjects[i]].inputParams[TotalObjects[x]].position==undefined && this.methods[numOfObjects[i]].inputParams[TotalObjects[x]].type!=undefined){
+                this.#arrayForErrors.push(`error: 'methods[${numOfObjects[i]}].inputParams[${TotalObjects[x]}].position' is undefined`);
+            }
+
+            else if(this.methods[numOfObjects[i]].inputParams[TotalObjects[x]].position != undefined && this.methods[numOfObjects[i]].inputParams[TotalObjects[x]].type != undefined){
+
+                if(Number.isInteger(this.methods[numOfObjects[i]].inputParams[TotalObjects[x]].position) !== true && typeof this.methods[numOfObjects[i]].inputParams[TotalObjects[x]].type !== "string"){
+                    this.#arrayForErrors.push(`error: 'methods[${numOfObjects[i]}].inputParams[${TotalObjects[x]}].position' AND 'methods[${numOfObjects[i]}].inputParams[${TotalObjects[x]}].type' have invalid datatypes`)
                 }//if datatype of this.methods[].inputParams[].namd AND this.methods[].inputParams[].type is invalid
-                else if(typeof this.methods[numOfObjects[i]].inputParams[TotalObjects[x]].name === "string" && typeof this.methods[numOfObjects[i]].inputParams[TotalObjects[x]].type !== "string"){
+                else if(Number.isInteger(this.methods[numOfObjects[i]].inputParams[TotalObjects[x]].position) === true && typeof this.methods[numOfObjects[i]].inputParams[TotalObjects[x]].type !== "string"){
                     this.#arrayForErrors.push(`error: 'methods[${numOfObjects[i]}].inputParams[${TotalObjects[x]}].type' has invalid datatype`)
                 }//if datatype of this.methods[].inputParams[].type is invalid
-                else if(typeof this.methods[numOfObjects[i]].inputParams[TotalObjects[x]].name !=="string" && typeof this.methods[numOfObjects[i]].inputParams[TotalObjects[x]].type ==="string"){
-                    this.#arrayForErrors.push(`error: 'methods[${numOfObjects[i]}].inputParams[${TotalObjects[x]}].name' has invalid datatype`)
+                else if(Number.isInteger(this.methods[numOfObjects[i]].inputParams[TotalObjects[x]].position) !==true && typeof this.methods[numOfObjects[i]].inputParams[TotalObjects[x]].type ==="string"){
+                    this.#arrayForErrors.push(`error: 'methods[${numOfObjects[i]}].inputParams[${TotalObjects[x]}].position' has invalid datatype`)
                 }//if datatype of this.methods[].inputParams[].name is invalid
 
             }//if this.methods[].inputParams[].name OR this.methods[].inputParams[].type has datatype of string.
@@ -316,60 +294,60 @@ class Domain{
     }//#loop_Through_inputParams_Repetition(numOfObjects, i, TotalObjects)
 
 
-    #validateDatatypes_for_validateColumns(numOfObjects, notObjects){
+    #validateDatatypes_for_validateProperties(numOfObjects, notObjects){
         
         if(numOfObjects.length==0){
-            this.#arrayForErrors.push(`error: all elements of 'columns' array have invalid datatypes`)
+            this.#arrayForErrors.push(`error: all elements of 'properties' array have invalid datatypes`)
         }//if numOfObjects is equal to 0
-        else if(numOfObjects.length == this.columns.length){
+        else if(numOfObjects.length == this.properties.length){
 
-            this.#loop_Through_Columns(numOfObjects);
+            this.#loop_Through_Properties(numOfObjects);
             
-        }//if variable named "numOfObjects" is equal to this.columns.length
+        }//if variable named "numOfObjects" is equal to this.properties.length
         else{
-            this.#arrayForErrors.push(`error: ${notObjects.length} elements of 'columns' array have invalid datatypes`)
+            this.#arrayForErrors.push(`error: ${notObjects.length} elements of 'properties' array have invalid datatypes`)
             
-            this.#loop_Through_Columns(numOfObjects);
+            this.#loop_Through_Properties(numOfObjects);
         }
-    }//#validateDatatypes_for_validateColumns(numOfObjects, notObjects)
+    }//#validateDatatypes_for_validateproperties(numOfObjects, notObjects)
 
-    #loop_Through_Columns(numOfObjects){
+    #loop_Through_Properties(numOfObjects){
         for(let i=0; i< numOfObjects.length; i++){
             
-            if(this.columns[numOfObjects[i]].name == undefined && this.columns[numOfObjects[i]].type == undefined){
+            if(this.properties[numOfObjects[i]].name == undefined && this.properties[numOfObjects[i]].type == undefined){
 
-                this.#arrayForErrors.push(`error: 'columns[${numOfObjects[i]}].name' AND 'columns[${numOfObjects[i]}].type' are undefined`)
+                this.#arrayForErrors.push(`error: 'properties[${numOfObjects[i]}].name' AND 'properties[${numOfObjects[i]}].type' are undefined`)
                 
-            }//if this.columns[].name and this.column.type is undefined
-            else if(this.columns[numOfObjects[i]].name == undefined){
-                this.#arrayForErrors.push(`error: 'columns[${numOfObjects[i]}].name' is undefined`)
+            }//if this.properties[].name and this.column.type is undefined
+            else if(this.properties[numOfObjects[i]].name == undefined){
+                this.#arrayForErrors.push(`error: 'properties[${numOfObjects[i]}].name' is undefined`)
 
-                if(typeof this.columns[numOfObjects[i]].type !== "string"){
-                    this.#arrayForErrors.push(`error: 'columns[${numOfObjects[i]}].type' has invalid datatype`)
-                }//if datatype of this.columns[].type is not "string"
+                if(typeof this.properties[numOfObjects[i]].type !== "string"){
+                    this.#arrayForErrors.push(`error: 'properties[${numOfObjects[i]}].type' has invalid datatype`)
+                }//if datatype of this.properties[].type is not "string"
 
-            }//if this.columns[].name is undefined
-            else if(this.columns[numOfObjects[i]].type == undefined){
-                this.#arrayForErrors.push(`error: 'columns[${numOfObjects[i]}].type' is undefined`)
+            }//if this.properties[].name is undefined
+            else if(this.properties[numOfObjects[i]].type == undefined){
+                this.#arrayForErrors.push(`error: 'properties[${numOfObjects[i]}].type' is undefined`)
 
-                if(typeof this.columns[numOfObjects[i]].name !== "string"){
-                    this.#arrayForErrors.push(`error: 'columns[${numOfObjects[i]}].name' has invalid datatype`)
-                }//if datatype of this.columns[].name is not "string"
+                if(typeof this.properties[numOfObjects[i]].name !== "string"){
+                    this.#arrayForErrors.push(`error: 'properties[${numOfObjects[i]}].name' has invalid datatype`)
+                }//if datatype of this.properties[].name is not "string"
             
-            }//if this.columns[].type is undefined
+            }//if this.properties[].type is undefined
             else{
-                if(typeof this.columns[numOfObjects[i]].name !== "string" && typeof this.columns[numOfObjects[i]].type !== "string"){
-                    this.#arrayForErrors.push(`error: 'columns[${numOfObjects[i]}].name' AND 'columns[${numOfObjects[i]}].type' have invalid datatypes`)
+                if(typeof this.properties[numOfObjects[i]].name !== "string" && typeof this.properties[numOfObjects[i]].type !== "string"){
+                    this.#arrayForErrors.push(`error: 'properties[${numOfObjects[i]}].name' AND 'properties[${numOfObjects[i]}].type' have invalid datatypes`)
                     
-                }//if datatype of this.columns[].name AND datatype of this.columns[].type is not "string"
-                else if(typeof this.columns[numOfObjects[i]].name !== "string"){
-                    this.#arrayForErrors.push(`error: 'columns[${numOfObjects[i]}].name' has invalid datatype`)
-                }//if datatype of this.columns[].name is not "string"
-                else if(typeof this.columns[numOfObjects[i]].type !== "string"){
-                    this.#arrayForErrors.push(`error: 'columns[${numOfObjects[i]}].type' has invalid datatype`)
+                }//if datatype of this.properties[].name AND datatype of this.properties[].type is not "string"
+                else if(typeof this.properties[numOfObjects[i]].name !== "string"){
+                    this.#arrayForErrors.push(`error: 'properties[${numOfObjects[i]}].name' has invalid datatype`)
+                }//if datatype of this.properties[].name is not "string"
+                else if(typeof this.properties[numOfObjects[i]].type !== "string"){
+                    this.#arrayForErrors.push(`error: 'properties[${numOfObjects[i]}].type' has invalid datatype`)
                 }//else
             }//else
-        }//looping through this.columns[] for dataTypes of keys in objects
-    }//#loop_Through_Columns(numOfObjects)
+        }//looping through this.properties[] for dataTypes of keys in objects
+    }//#loop_Through_properties(numOfObjects)
 
 }
