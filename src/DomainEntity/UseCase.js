@@ -8,6 +8,7 @@ class UseCase {
     testCases;
     picture;
     assignedDomainEntity;
+    #arrayForErrors = [];
 
     constructor(name, description, actors, preConditions, postConditions, steps, testCases, picture, assignedDomainEntity) {
         this.name = name;
@@ -22,64 +23,73 @@ class UseCase {
     }
 
     validateName() {
-        return typeof this.name === "string" ? null : "Name must be a string.";
+        if (typeof this.name !== "string") {
+            this.#arrayForErrors.push("error: Name must be a string.");
+        }
     }
 
     validateDescription() {
-        return typeof this.description === "string" ? null : "Description must be a string.";
+        if (typeof this.description !== "string") {
+            this.#arrayForErrors.push("error: Description must be a string.");
+        }
     }
 
     validateActors() {
-        return typeof this.actors === "string" ? null : "Actors must be a string.";
+        if (typeof this.actors !== "string") {
+            this.#arrayForErrors.push("error: Actors must be a string.");
+        }
     }
 
     validatePreConditions() {
-        return typeof this.preConditions === "string" ? null : "Pre-conditions must be a string.";
+        if (typeof this.preConditions !== "string") {
+            this.#arrayForErrors.push("error: Pre-conditions must be a string.");
+        }
     }
 
     validatePostConditions() {
-        return typeof this.postConditions === "string" ? null : "Post-conditions must be a string.";
+        if (typeof this.postConditions !== "string") {
+            this.#arrayForErrors.push("error: Post-conditions must be a string.");
+        }
     }
 
     validateSteps() {
         if (!Array.isArray(this.steps) || !this.steps.every(step => typeof step === "string")) {
-            return "Steps must be an array of strings.";
+            this.#arrayForErrors.push("error: Steps must be an array of strings.");
         }
-        return null;
     }
 
     validateTestCases() {
         if (!Array.isArray(this.testCases) || !this.testCases.every(testCase => typeof testCase === "string")) {
-            return "Test cases must be an array of strings.";
+            this.#arrayForErrors.push("error: Test cases must be an array of strings.");
         }
-        return null;
     }
 
     validatePicture() {
-        return this.picture !== undefined ? null : "Picture is required.";
+        if (this.picture === undefined) {
+            this.#arrayForErrors.push("error: Picture is required.");
+        }
     }
 
     validateAssignedDomainEntity() {
         if (!Array.isArray(this.assignedDomainEntity) || !this.assignedDomainEntity.every(entity => typeof entity === "string")) {
-            return "Assigned domain entity must be an array of strings.";
+            this.#arrayForErrors.push("error: Assigned domain entity must be an array of strings.");
         }
-        return null;
     }
 
     validate() {
-        const errors = [
-            this.validateName(),
-            this.validateDescription(),
-            this.validateActors(),
-            this.validatePreConditions(),
-            this.validatePostConditions(),
-            this.validateSteps(),
-            this.validateTestCases(),
-            this.validatePicture(),
-            this.validateAssignedDomainEntity()
-        ].filter(error => error !== null);
+        this.#arrayForErrors = []; // Clear any previous errors
 
-        return errors.length === 0 ? null : errors;
+        this.validateName();
+        this.validateDescription();
+        this.validateActors();
+        this.validatePreConditions();
+        this.validatePostConditions();
+        this.validateSteps();
+        this.validateTestCases();
+        this.validatePicture();
+        this.validateAssignedDomainEntity();
+
+        return this.#arrayForErrors.length === 0 ? null : this.#arrayForErrors;
     }
 }
 
