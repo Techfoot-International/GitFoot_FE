@@ -9,6 +9,8 @@ class UseCase {
     picture;
     assignedDomainEntity;
     #arrayForErrors = [];
+    requirements = [];
+
 
     constructor(name, description, actors, preConditions, postConditions, steps, testCases, picture, assignedDomainEntity) {
         this.name = name;
@@ -22,6 +24,23 @@ class UseCase {
         this.assignedDomainEntity = assignedDomainEntity;
     }
 
+    
+    addRequirement(requirement) {
+        this.requirements.push(requirement);
+    }
+
+    validateRequirements() {
+        const errors = [];
+
+        this.requirements.forEach(requirement => {
+            const requirementErrors = requirement.validate();
+            if (requirementErrors) {
+                errors.push({ requirement, errors: requirementErrors });
+            }
+        });
+
+        return errors.length === 0 ? null : errors;
+    }
     validateName() {
         if (typeof this.name !== "string") {
             this.#arrayForErrors.push("error: Name must be a string.");
