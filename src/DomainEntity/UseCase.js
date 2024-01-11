@@ -96,24 +96,32 @@ class UseCase {
     }
 
     validate() {
-        this.#arrayForErrors = []; // Clear any previous errors
+        const errors = [
+            this.validateName(),
+            this.validateDescription(),
+            this.validateActors(),
+            this.validatePreConditions(),
+            this.validatePostConditions(),
+            this.validateSteps(),
+            this.validateTestCases(),
+            this.validatePicture(),
+            this.validateAssignedDomainEntity(),
+            this.validateRequirements()
+        ].filter(error => error !== null);
 
-        this.validateName();
-        this.validateDescription();
-        this.validateActors();
-        this.validatePreConditions();
-        this.validatePostConditions();
-        this.validateSteps();
-        this.validateTestCases();
-        this.validatePicture();
-        this.validateAssignedDomainEntity();
-
-        return this.#arrayForErrors.length === 0 ? null : this.#arrayForErrors;
+        return errors.length === 0 ? null : errors;
     }
 }
 
 // Example usage:
 const useCase = new UseCase("Use Case 1", "Description...", "Actor 1", "Pre-condition...", "Post-condition...",
     ["Step 1", "Step 2"], ["Test Case 1", "Test Case 2"], "picture.jpeg", ["Table"]);
+
+const functionalReq = new Functional_Req("F1", "Functional Requirement 1");
+const nonFunctionalReq = new Non_Functional_Req("NF1", "Non-Functional Requirement 1", "Performance");
+
+useCase.addRequirement(functionalReq);
+useCase.addRequirement(nonFunctionalReq);
+
 const validationErrors = useCase.validate();
 console.log(validationErrors);
