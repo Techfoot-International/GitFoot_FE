@@ -3,6 +3,12 @@ class Requirement{
     description;
     #arrayForErrors=[]
 
+    constructor(code, description){
+        this.code=code;
+        this.description=description;
+    }
+    
+
     validateCode(){
         if(this.code==undefined){
             this.#arrayForErrors.push("error: no value given to 'code'");
@@ -42,6 +48,11 @@ class Requirement{
 class Non_Functional_Req extends Requirement{
     type;
 
+    constructor(code, description, type){
+        super(code, description)
+        this.type=type;
+    }
+
     validateType(){
         if(this.type ==undefined){
             this.FuncForErrors("error: no value given to 'type'");
@@ -64,4 +75,15 @@ class Non_Functional_Req extends Requirement{
 
 }
 
-class Functional_Req extends Requirement{}
+class Functional_Req extends Requirement{
+
+    constructor(code, description){
+        super(code, description);
+    }
+    
+}
+
+export {
+    Functional_Req,
+    Non_Functional_Req
+};
