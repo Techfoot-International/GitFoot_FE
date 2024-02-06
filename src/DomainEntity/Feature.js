@@ -1,7 +1,7 @@
-class Product{
+class Feature{
     name;
     description;
-    modules=[]
+    useCases=[];
     #arrayForErrors=[];
 
     constructor(name, description){
@@ -9,18 +9,18 @@ class Product{
         this.description=description;
     }
 
-    addModule(module){
-        this.modules.push(module)
+    addUseCase(useCase){
+        this.useCases.push(useCase);
     }
 
-    validateModule(){
-        if(this.modules.length===0){
-            this.#arrayForErrors.push("error: 'module' array is empty")
+    validateUseCase(){
+        if(this.useCases.length===0){
+            this.#arrayForErrors.push("error: 'useCases' array is empty")
         }
         else{
-            this.modules.forEach(M => {
-                if(M.validate()){
-                    this.#arrayForErrors.push(M, M.validate())
+            this.useCases.forEach(U => {
+                if(U.validate()){
+                    this.#arrayForErrors.push(U, U.validate())
                 }
             });
         }
@@ -45,11 +45,11 @@ class Product{
     validate(){
         this.validateName()
         this.validateDescription()
-        this.validateModule()
+        this.validateUseCase()
         if(this.#arrayForErrors.length!=0){
             return this.#arrayForErrors;
         }
     }
 }
 
-export default Product;
+export default Feature;

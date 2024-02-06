@@ -3,6 +3,12 @@ class Domain{
     properties;
     methods;
     #arrayForErrors=[];
+    
+    constructor(name, properties, methods){
+        this.name=name;
+        this.properties=properties;
+        this.methods=methods;
+    }
 
     validateName(){
         if(this.name ==undefined){
@@ -338,3 +344,6 @@ class Domain{
     }//#loop_Through_properties(numOfObjects)
 
 }
+
+
+export default Domain;

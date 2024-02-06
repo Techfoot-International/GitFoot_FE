@@ -4,6 +4,12 @@ class Table {
     columns;
     #arrayForErrors=[];
 
+    constructor(name, description, columns){
+        this.name=name;
+        this.description=description;
+        this.columns=columns;
+    }
+
     validateName(){
         if(this.name== undefined){
             this.#arrayForErrors.push("error: no value given to 'name'");
@@ -118,5 +124,6 @@ class Table {
             return this.#arrayForErrors;
         }
     }
-
 }
+
+export default Table;
