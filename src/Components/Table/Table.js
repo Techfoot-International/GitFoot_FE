@@ -1,6 +1,6 @@
 import "./Table.css"
 import React from "react";
-import RowsAndData from "./RowsAndData";
+import RowsAndData from "./RowsAndData.js";
 
 const Table = (props) => {
 
