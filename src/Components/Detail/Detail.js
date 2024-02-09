@@ -47,3 +47,7 @@ function Detail(props){
 }
 
 export default Detail;
+
+/*  pass an object to Detail component e.g 
+    Random={ name: "SpreeSuite", description: "This is a product"} OR
+    Random={ name: "SpreeSuite", description: "This is a product", code: "12", preCondition: "abc", postCondition: "efg"}*/
