@@ -5,7 +5,7 @@ function NavBar(){
             <div className="div-grid">
                 <div className="grid-item grid-logo">
                     <div id="box">
-                        <img src={wolf}/>
+                        <img/>
                     </div>
                 </div>
                 <div className="grid-item"></div>
