@@ -4,8 +4,8 @@ import RowsAndData from "./RowsAndData.js";
 
 const Table = (props) => {
 
-  const H=props.content.Heading.length;
-  const MapingK=Object.keys(props.content.Maping)
+  const H=props.content.heading.length;
+  const MapingK=Object.keys(props.content.maping)
  
 
   if(H!==MapingK.length){
@@ -17,7 +17,7 @@ const Table = (props) => {
       <thead>
         <tr>
             <th className="th-td">#</th>
-          {props.content.Heading.map((heading, index) => (
+          {props.content.heading.map((heading, index) => (
             <th key={index}>{heading}</th>
           ))}
         </tr>
@@ -30,3 +30,9 @@ const Table = (props) => {
 };
 
 export default Table;
+
+// "Table" component takes an object
+
+// Example
+// const obj ={heading: ["name","description"], data: [{a:"rose", b: "She's a human."}, {a: "clara", b: "She's a human too."}], maping:{ name: "a", description: "b"} }
+// <Table content={obj}/>

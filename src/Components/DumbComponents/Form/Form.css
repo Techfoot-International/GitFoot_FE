@@ -5,6 +5,7 @@ form{
     border-radius: 3%;
     padding: 10px 30px 30px 30px;
     user-select: none;
+    background-color: white;
 }
 
 .div-flex{

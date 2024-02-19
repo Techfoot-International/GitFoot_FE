@@ -51,11 +51,12 @@ function Form(props){
     </form>
     }// if props.type.toUpperCase()==="FEATURE"
 
-    else if(props.type.toUpperCase()==="USECASE"){
+    else if(props.type.toUpperCase()==="PRODUCT"){
         return <form>
         <div className="div-flex">
+            
         <div className="flex-item">
-            <h2>Use Case</h2>
+            <h2>Product</h2>
         </div>
         <div className="flex-item">
     
@@ -75,12 +76,13 @@ function Form(props){
     </form>
     }
 
-    else if(props.type.toUpperCase()==="PRODUCT"){
+    else if(props.type.toUpperCase()==="USECASE"){
 
         return <form>
         <div className="div-flex">
+
         <div className="flex-item">
-            <h2>Product</h2>
+            <h2>Use Case</h2>
         </div>
         <div className="flex-item">
 
@@ -110,7 +112,8 @@ function Form(props){
 
         <div className="flex-item">
             <input type="submit" className="submit-button" value="Add"/>
-        </div>     
+        </div> 
+
         </div>
     </form>
     }

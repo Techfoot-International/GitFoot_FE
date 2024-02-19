@@ -1,23 +1,32 @@
-*{
-    margin:0px;
-    padding:0px;
-    box-sizing: border-box;
-  }
+
 .sidebar {
+    margin: 0;
     width: 100%;
-    display: flex;
-    gap:10%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
 }
+
+
+.grid-item2{
+    justify-self: center;
+    margin-top: 10%;
+    margin-bottom: 9%;
+}
+
 .container {
-    width: 18em;
-    height:95vh;
-    margin-top: 2em;
-    padding-top: 0.5em;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 250px;
+    margin:0;
+    padding-top: 37px;
     display: flex;
     justify-content: space-evenly;
-    background-color: black;
+    background-color: white;
     color:white;
-    box-shadow: 0px 0px 5px grey;
+    box-shadow: 0px 0px 2px grey;
 }
 .item1{
     padding-top: 30px;
@@ -27,11 +36,11 @@
 }
 .link {
     text-decoration: none;
-    color: white;
+    color: black;
     align-self: center center;
 }
 .add-button {
-    background-color: white;
+    background-color: grey;
     color: black;
     border: none;
     border-radius: 10%;
@@ -39,22 +48,22 @@
     height: 20px;
     font-size: 10px;
 }
-.form-container {
-    align-items: center;
-    margin: auto auto;
-    justify-content: center;
-    transition: transform 0.3s ease;
-}
-.show {
-    transform: translateX(0);
-}
-.hide {
-    transform: translateX(100%);
-}
+
+
 .btn1:hover{
     color:blue;
     padding:10px 0px 10px 0px;
 }
 .add-button:hover{
     background-color:blue;
+}
+
+.wrapper{
+    position: relative;
+}
+
+.sub-container{
+    display: flex;
+    justify-content: space-between;
+    
 }
