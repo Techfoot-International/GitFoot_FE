@@ -1,84 +1,147 @@
-import "./Form.css"
-import React from "react";
+import React, { useState } from "react";
+import "./Form.css";
+//import Data from "../../MockStore/StoreInBrowser.js";
+import Data from "../../MockStore/Data.js"
 
-
-function Form(props){
-
-    if(props.type.toUpperCase()==="MODULE"){
-        return <form>
-        <div className="div-flex">
-        <div className="flex-item">
-            <h2>Module</h2>
-        </div>
-        <div className="flex-item">
+const Form = (props) => {
+    const [name, setName] = useState("");
+    const [description, setDescription] = useState("");
+    const [code, setCode] = useState("");
+    const [preCondition, setPreCondition] = useState("");
+    const [postCondition, setPostCondition] = useState("");
     
-            <label >Name</label>
-            <textarea type="text"  maxLength={45}/>
-    
-        </div>
-        <div className="flex-item">
-    
-            <label>Description</label>
-            <textarea type="text" className="description" maxLength={500}/>
-        </div>
-        <div className="flex-item">
-            <input type="submit" className="submit-button" value={"Add"}/>
-        </div>
-        </div>
-    </form>
-    }// if props.type.toUpperCase()==="MODULE"
-    else if(props.type.toUpperCase()==="FEATURE"){
-        return <form>
-        <div className="div-flex">
-        <div className="flex-item">
-            <h2>Feature</h2>
-        </div>
-        <div className="flex-item">
-    
-            <label >Name</label>
-            <textarea type="text"  maxLength={45}/>
-    
-        </div>
-        <div className="flex-item">
-    
-            <label>Description</label>
-            <textarea type="text" className="description" maxLength={500}/>
-        </div>
-        <div className="flex-item">
-            <input type="submit" className="submit-button" value={"Add"}/>
-        </div>
-        </div>
-    </form>
-    }// if props.type.toUpperCase()==="FEATURE"
-
-    else if(props.type.toUpperCase()==="PRODUCT"){
-        return <form>
-        <div className="div-flex">
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+                const response = await Data.createProduct({ name, description });
+                console.log(response); 
+                setName("");
+                setDescription("");
             
-        <div className="flex-item">
-            <h2>Product</h2>
-        </div>
-        <div className="flex-item">
-    
-            <label >Name</label>
-            <textarea type="text"  maxLength={45}/>
-    
-        </div>
-        <div className="flex-item">
-    
-            <label>Description</label>
-            <textarea type="text" className="description" maxLength={500}/>
-        </div>
-        <div className="flex-item">
-            <input type="submit" className="submit-button" value={"Add"}/>
-        </div>
-        </div>
-    </form>
-    }
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    };
 
-    else if(props.type.toUpperCase()==="USECASE"){
+    const handleSubmitUseCase = async (e) => {
+        e.preventDefault();
+        try {
+                const response = await Data.createUseCase({ name, description,code,preCondition,postCondition });
+                console.log(response); 
+                setName("");
+                setDescription("");
+                setCode("");
+                setPreCondition("")
+                setPostCondition("")
+            
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    };
 
-        return <form>
+
+    if (props.type.toUpperCase() === "PRODUCT") {
+        return (
+            <form onSubmit={handleSubmit} >
+                <div className="div-flex">
+                    <div className="flex-item">
+                        <h2>Product</h2>
+                    </div>
+                    <div className="flex-item">
+                        <label>Name</label>
+                        <textarea
+                            type="text"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            maxLength={45}
+                            required
+                        />
+                    </div>
+                    <div className="flex-item">
+                        <label>Description</label>
+                        <textarea
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                            className="description"
+                            maxLength={500}
+                            required
+                        />
+                    </div>
+                    <div className="flex-item">
+                        <input type="submit" className="submit-button" value={"Add"} />
+                    </div>
+                </div>
+            </form>
+        );
+    } else if (props.type.toUpperCase() === "MODULE") {
+        return (
+            <form onSubmit={handleSubmit} >
+                <div className="div-flex">
+                    <div className="flex-item">
+                        <h2>Module</h2>
+                    </div>
+                    <div className="flex-item">
+                        <label>Name</label>
+                        <textarea
+                            type="text"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            maxLength={45}
+                            required
+                        />
+                    </div>
+                    <div className="flex-item">
+                        <label>Description</label>
+                        <textarea
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                            className="description"
+                            maxLength={500}
+                            required
+                        />
+                    </div>
+                    <div className="flex-item">
+                        <input type="submit" className="submit-button" value={"Add"} />
+                    </div>
+                </div>
+            </form>
+        );
+    }else if (props.type.toUpperCase() === "FEATURE") {
+        return (
+            <form onSubmit={handleSubmit} >
+                <div className="div-flex">
+                    <div className="flex-item">
+                        <h2>Feature</h2>
+                    </div>
+                    <div className="flex-item">
+                        <label>Name</label>
+                        <textarea
+                            type="text"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            maxLength={45}
+                            required
+                        />
+                    </div>
+                    <div className="flex-item">
+                        <label>Description</label>
+                        <textarea
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                            className="description"
+                            maxLength={500}
+                            required
+                        />
+                    </div>
+                    <div className="flex-item">
+                        <input type="submit" className="submit-button" value={"Add"} />
+                    </div>
+                </div>
+            </form>
+        );
+    }else if(props.type.toUpperCase()==="USECASE"){
+
+        return <form onSubmit={handleSubmitUseCase}>
         <div className="div-flex">
 
         <div className="flex-item">
@@ -87,27 +150,47 @@ function Form(props){
         <div className="flex-item">
 
             <label >Name</label>
-            <textarea type="text"  maxLength={45}/>
+            <textarea type="text"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            maxLength={45}
+                            required/>
 
         </div>
         <div className="flex-item">
 
             <label>Description</label>
-            <textarea type="text" className="description" maxLength={500}/>
+            <textarea value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                            className="description"
+                            maxLength={500}
+                            required/>
         </div>
         <div className="flex-item">
             <label >Code</label>
-            <textarea type="text"  maxLength={45}/>
+            <textarea type="text"
+                            value={name}
+                            onChange={(e) => setCode(e.target.value)}
+                            maxLength={45}
+                            required/>
         </div>
 
         <div className="flex-item">
             <label >PreCondition</label>
-            <textarea type="text"  maxLength={45}/>
+            <textarea type="text"
+                            value={name}
+                            onChange={(e) => setPostCondition(e.target.value)}
+                            maxLength={45}
+                            required/>
         </div>
 
         <div className="flex-item">
             <label >PostCondition</label>
-            <textarea type="text"  maxLength={45}/>
+            <textarea type="text"
+                            value={name}
+                            onChange={(e) => setPostCondition(e.target.value)}
+                            maxLength={45}
+                            required/>
         </div>
 
         <div className="flex-item">
@@ -117,10 +200,7 @@ function Form(props){
         </div>
     </form>
     }
-        
-}
+};
 
 export default Form;
-
-// usage example
-// <Form type={"product"}/
+//export {productArr};
