@@ -122,5 +122,5 @@ function Form(props){
 
 export default Form;
 
-//usage example
-//<Form type={"product"}/>
+// usage example
+// <Form type={"product"}/
