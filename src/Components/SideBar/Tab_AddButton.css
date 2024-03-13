@@ -1,0 +1,14 @@
+.flex-items p{
+    display: inline;
+    color: black;
+    margin-right: 20px;
+}
+
+.flex-items p:hover{
+    cursor: pointer;
+    color: grey;
+}
+
+button:hover{
+    cursor: pointer;
+}

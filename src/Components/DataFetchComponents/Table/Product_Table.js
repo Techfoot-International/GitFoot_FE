@@ -24,7 +24,7 @@ const Product_Table = (props) => {
         </tr>
       </thead>
       <tbody>
-      {<RowsAndData content={props.content}/>}
+      {<RowsAndData content={props.content} showDetailHandler={props.showDetailHandler}/>}
       </tbody>
     </table>
   );
@@ -50,4 +50,4 @@ export default Product_Table;
                                   ]}all modules array
                         }]all products are in this array */
 
-// <Table content={obj}/>
+// <Table content={obj.product} showDetailHandler={showDetailHandler}/>
