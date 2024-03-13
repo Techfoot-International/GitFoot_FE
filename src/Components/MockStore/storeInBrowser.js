@@ -52,6 +52,7 @@ export default {
             obj.name=props.name;
             obj.description=props.description;
             arra=JSON.parse(localStorage.getItem('product'))
+            console.log(arra)
             arra.push(obj)
             console.log(arra)
             localStorage.setItem('product', JSON.stringify(arra));
@@ -62,18 +63,18 @@ export default {
                 return Promise.resolve({
                     "resp": {
                         "success": true,
-                        "body": "Product add is Successfully"
+                        "body": "Product added Successfully"
                     }
                 })
             }
         })
-    },
+    }//this function takes 2 values like this "{name, description}"
+    ,
     createModule: async function(props){
         arra=JSON.parse(localStorage.getItem('product'))
         for (let i = 0; i < arra.length; i++) {
-            if(arra[i].id==props.id){
-                arra[i].module.push({name:props.name});
-                arra[i].module.push({description:props.description});
+            if(arra[i].id==props.p_id){
+                arra[i].module.push({id:"", name:props.name, description: props.description});
                 i=arra.length;
             }//if (i < arra.length)
             
@@ -91,15 +92,15 @@ export default {
                 })
             }
         })
-    },
+    }//this function takes 3 values like this "{p_id, name, description}"
+    ,
     createFeature: async function(props){
         arra=JSON.parse(localStorage.getItem('product'))
         for (let i = 0; i < arra.length; i++) {
             if(arra[i].id==props.p_id){
                 for (let x = 0; x < arra[i].module.length; x++) {
                     if(arra[i].module[x].id==props.m_id){
-                        arra[i].module[x].feature.name=props.name;
-                        arra[i].module[x].feature.description=props.description;
+                        arra[i].module[x].feature.push({id:"", name: props.name, description: props.description})
                         x=arra[i].module.length;
 
                     }//if (x < arra[i].module.length)
@@ -123,7 +124,8 @@ export default {
             }
         })
 
-    },
+    }//this function takes 4 values like this "{p_id, m_id, name, description}"
+    ,
     createUseCase: async function(props){
         arra=JSON.parse(localStorage.getItem('product'))
         for (let i = 0; i < arra.length; i++) {
@@ -132,13 +134,14 @@ export default {
                     if(arra[i].module[x].id==props.m_id){
                         for (let k = 0; k < arra[i].module[x].feature.length ; k++) {
                             if(arra[i].module[x].feature[k].id==props.f_id){
-                                arra[i].module[x].feature[k].useCase.push()
+                                arra[i].module[x].feature[k].useCase.push({id:"", name:props, description: props.description})
+                                k=arra[i].module[x].feature.length;
                             }
                             
                         }//for ( arra[i].module[x].feature.length )
-
+                        x=arra[i].module.length;
                     }//if (x < arra[i].module.length)
-                    
+                    i=arra.length
                 }//for loop (arra[i].module.length)
                 i=arra.length;
             }//if (i < arra.length)
@@ -151,12 +154,12 @@ export default {
                 return Promise.resolve({
                     "resp": {
                         "success": true,
-                        "body": "Feature added Successfully"
+                        "body": "UseCase added Successfully"
                     }
                 })
             }
         })
-    }
+    }//this function takes 5 values like this "{p_id, m_id, f_id, name, description}"
 };
 
 export {productData}
