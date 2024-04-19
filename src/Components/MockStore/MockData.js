@@ -1,55 +1,82 @@
 export default {
-    getProducts : async function(){
+    
+    getAllProducts : async function(){
         return Promise.resolve({
-            json:function () {
-                return Promise.resolve({
+            
                     product: [
                         {
                             "id":"1",
                             "name": "Google",
-                            "discription": "This is a search engine.",
+                            "description": "This is a search engine.",
                             "module":[{ "id": "1",
-                                        "name": "abc",
+                                        "name": "module_12345678",
                                         "description": "efg",
-                                        "features": [{  "id":"1",
-                                                        "name": "abc",
+                                        "feature": [{  "id":"1",
+                                                        "name": "feature_1",
+                                                        "description": "efg",
+                                                        "useCase": [{   "id": "2",
+                                                                        "name": "useCase_1",
+                                                                        "description": "efg",
+                                                                    },
+                                                                    {   "id": "2",
+                                                                        "name": "useCase_2",
+                                                                        "description": "efg",
+                                                                    }
+                                                                    ]//useCase array 
+                                                    },
+                                                    {  "id":"2",
+                                                        "name": "feature_2",
                                                         "description": "efg",
                                                         "useCase": [{   "id": "1",
-                                                                        "name": "abc",
+                                                                        "name": "useCase",
+                                                                        "description": "efg",
+                                                                    }]//useCase array 
+                                                    }
+                                                    ]//features array
+                                    },
+                                    { "id": "1",
+                                        "name": "module_2",
+                                        "description": "efg",
+                                        "feature": [{  "id":"1",
+                                                        "name": "feature",
+                                                        "description": "efg",
+                                                        "useCase": [{   "id": "1",
+                                                                        "name": "useCase",
                                                                         "description": "efg",
                                                                     }]//useCase array 
                                                     }]//features array
-                                    }]//module array
+                                    }
+                                    ]//module array
                         },
                         {
-                            "id":"1",
+                            "id":"2",
                             "name": "FireFox",
-                            "discription": "This is a search engine.",
+                            "description": "This is a search engine.",
                             "module":[{ "id": "1",
-                                        "name": "abc",
+                                        "name": "module_1",
                                         "description": "efg",
-                                        "features": [{  "id":"1",
-                                                        "name": "abc",
+                                        "feature": [{  "id":"1",
+                                                        "name": "feature",
                                                         "description": "efg",
                                                         "useCase": [{   "id": "1",
-                                                                        "name": "abc",
+                                                                        "name": "useCase",
                                                                         "description": "efg",
                                                                     }]//useCase array 
                                                     }]//features array
                                     }]//module array
                         },
                         {
-                            "id":"1",
+                            "id":"3",
                             "name": "Mcdonald's",
-                            "discription": "This is a food brand.",
+                            "description": "This is a food brand.",
                             "module":[{ "id": "1",
-                                        "name": "abc",
+                                        "name": "module_1",
                                         "description": "efg",
-                                        "features": [{  "id":"1",
-                                                        "name": "abc",
+                                        "feature": [{  "id":"1",
+                                                        "name": "feature",
                                                         "description": "efg",
                                                         "useCase": [{   "id": "1",
-                                                                        "name": "abc",
+                                                                        "name": "useCase",
                                                                         "description": "efg",
                                                                     }]//useCase array 
                                                     }]//features array
@@ -58,16 +85,29 @@ export default {
                         {
                             "id":"1",
                             "name": "Gillet",
-                            "discription": "This is a food brand.",
+                            "description": "This is a food brand.",
+                        },
+                        {
+                            "id":"3",
+                            "name": "Saphora",
+                            "description": "This is a cosmetic brand.",
+                            "module":[{ "id": "1",
+                                        "name": "module_1",
+                                        "description": "efg",
+                                    },
+                                    { "id": "1",
+                                        "name": "module_2",
+                                        "description": "efg",
+                                    }
+                                    ]//module array
                         }
 
                     ]//products array
-
-                })//Promise.resolve
-
-            }//json
         })
-    },//getProducts
+    },//getAllProducts
+    getProduct: async function(){
+        ///////////////////////////////////////////////////////////////////////////////
+    },//getProduct
     createProduct : async function(product){
         
         return Promise.resolve({
@@ -87,7 +127,22 @@ export default {
                 )
             }
         })
-    }//updateProduct
+    },//updateProduct
+    createModule : async function(module){
+        return Promise.resolve({
+            "response":"Module added successfully."
+        })
+    },// createModule
+    createFeature : async function(feature){
+        return Promise.resolve({
+            "response":"feature added successfully."
+        })
+    },//createFeature
+    createUseCase : async function(useCase){
+        return Promise.resolve({
+            "response":"useCase added successfully."
+        })
+    }
 }//export default
 
 const obj ={product: [{name: "SpreeSuite",

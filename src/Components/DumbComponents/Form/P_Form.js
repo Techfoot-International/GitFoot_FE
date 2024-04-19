@@ -1,22 +1,29 @@
 import React, { useState } from "react";
 import "./Form.css";
 import Data from "../../MockStore/MockData.js"
+//import Data from '../../MockStore/storeInBrowser.js';
+
 
 function P_Form(props){
+
+    var p_id;
+    if(props.product_id===undefined){
+        p_id=1;
+    }
+
     const [p_name, set_p_name] = useState("");
     const [p_description, set_p_description] = useState("");
 
     const handleSubmit = async (event) => {
         event.preventDefault()
         try {
-                const response = await Data.createProduct({ p_name, p_description });
+                const response = await Data.createProduct({ p_id, p_name, p_description });
                 console.log(response); 
                 if(response){
                     set_p_name("");
                     set_p_description("");
-                    props.showFormHandler(false,true)
+                    props.fetchData(true)
                 }
-                
             
         } catch (error) {
             console.error("Error:", error);

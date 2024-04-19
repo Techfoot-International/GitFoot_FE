@@ -24,7 +24,7 @@ const Product_Table = (props) => {
         </tr>
       </thead>
       <tbody>
-      {<RowsAndData content={props.content} showDetailHandler={props.showDetailHandler}/>}
+      {<RowsAndData content={props.content} showDetailHandler={props.showDetailHandler} specificPro={props.specificPro}/>}
       </tbody>
     </table>
   );

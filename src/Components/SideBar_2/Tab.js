@@ -3,17 +3,9 @@ import './Tab_AddButton.css'
 
 function Tab(props){
 
-    function clickTab1(){
-        props.showTableHandler(true,false)
-    }
-
-    function clickTab2(){
-        //
-    }
-
     if(props.type==="all_products"){
         return <div className="flex-items">
-        <p onClick={clickTab1}>{props.tabName}</p>
+        <p>{props.tabName}</p>
         </div>
     }
     else if(props.type==="one_product"){
