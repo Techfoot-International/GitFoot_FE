@@ -1,0 +1,13 @@
+.flexBox-child{
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    /*border-bottom: 1px solid #CCD3CA;*/
+}
+
+.solid-line{
+    border-bottom: 1px solid #9CAFAA;
+}

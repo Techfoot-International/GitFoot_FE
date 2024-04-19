@@ -1,0 +1,13 @@
+#module_div{
+    padding-left: 25px;
+}
+
+#feature_div{
+    padding-left: 25px;
+    border-left: 1px solid #9CAFAA;
+}
+
+#useCase_div{
+    padding-left: 32px;
+    border-left: 1px solid #9CAFAA;
+}

@@ -1,43 +1,44 @@
 import React, { useState } from "react";
 import "./Form.css";
 import Data from "../../MockStore/MockData.js"
+//import Data from '../../MockStore/storeInBrowser.js';
 
-function F_Form(){
+function F_Form(props){
 
-    const [name, setName] = useState("");
-    const [description, setDescription] = useState("");
-    const [code, setCode] = useState("");
-    const [preCondition, setPreCondition] = useState("");
-    const [postCondition, setPostCondition] = useState("");
+    const p_id=props.p_id;
+    const m_id=props.m_id;
+
+    const [f_name, set_f_name] = useState("");
+    const [f_description, set_f_description] = useState("");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-                const response = await Data.createProduct({ name, description });
+                const response = await Data.createFeature({p_id, m_id, f_name, f_description });
                 console.log(response); 
-                setName("");
-                setDescription("");
-            
+
+                if(response){
+                    set_f_name("");
+                    set_f_description("");
+
+                    props.fetchData(true)
+                }    
+
         } catch (error) {
             console.error("Error:", error);
         }
     };
 
-    const handleSubmitUseCase = async (e) => {
-        e.preventDefault();
-        try {
-                const response = await Data.createUseCase({ name, description,code,preCondition,postCondition });
-                console.log(response); 
-                setName("");
-                setDescription("");
-                setCode("");
-                setPreCondition("")
-                setPostCondition("")
-            
-        } catch (error) {
-            console.error("Error:", error);
-        }
-    };
+    function handleChange(event){
+        const name= event.target.name
+        const value= event.target.value
+
+        if(name==="feature_name"){
+            set_f_name(value)
+        }else if(name==="feature_description"){
+            set_f_description(value)
+        }   
+    }
 
     return <form onSubmit={handleSubmit} >
     <div className="div-flex">
@@ -47,9 +48,10 @@ function F_Form(){
         <div className="flex-item">
             <label>Name</label>
             <textarea
+                name="feature_name"
                 type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                value={f_name}
+                onChange={handleChange}
                 maxLength={45}
                 required
             />
@@ -57,8 +59,9 @@ function F_Form(){
         <div className="flex-item">
             <label>Description</label>
             <textarea
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                name="feature_description"
+                value={f_description}
+                onChange={handleChange}
                 className="description"
                 maxLength={500}
                 required

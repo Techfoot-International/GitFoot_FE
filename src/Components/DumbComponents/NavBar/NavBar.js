@@ -1,5 +1,8 @@
 import "./NavBar.css"
-import wolf from "./wolf2.png"
+//import logo from "./wolf2.png"
+//import logo from "./logo.png"
+//import logo from "./logo.svg"
+
 function NavBar(){
     return <nav>
             <div className="div-grid">

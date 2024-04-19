@@ -3,40 +3,30 @@ import './Tab_AddButton.css'
 
 function AddButton(props){
 
-    function Add_Product(){
-        props.showFormHandler(true, false, "product", false)//it shows the form to add product
-    }
-
-    function Add_Module(){
-        props.showFormHandler(true, true, "module", false)//it shows the form to add module
-    }
-
-    function Add_Feature(){
-        props.showFormHandler(true, true, "feature", false)//it shows the form to add module
-    }
-    
-    function Add_useCase(){
-        props.showFormHandler(true, true, "useCase", false)
+    function clickMe(){
+        props.tracking_id_func(props.tracking_id)
+        console.log("i'm the error")
+        //console.log(props.tracking_id)
     }
 
     if(props.type==="add_p"){
         return <div className="flex-items">
-        <button onClick={Add_Product}>+</button>
+        <button onClick={clickMe}>+</button>
         </div>
     }//this is the button for adding product
     else if(props.type==="add_m"){
         return <div className="flex-items">
-        <button onClick={Add_Module}>+</button>
+        <button onClick={clickMe}>+</button>
         </div>
     }// this is the button for adding module
     else if(props.type==="add_f"){
         return <div className="flex-items">
-        <button onClick={Add_Feature}>+</button>
+        <button onClick={clickMe}>+</button>
         </div>
     }// this is the button for adding feature
     else if(props.type==="add_uc"){
         return <div className="flex-items">
-        <button onClick={Add_useCase}>+</button>
+        <button onClick={clickMe}>+</button>
         </div>
     }// this is the button for adding useCase
 }

@@ -1,10 +1,9 @@
 form{
     text-align: center;
-    height: 420px;
     width: 550px;
     margin: 0;
-    box-shadow: 0px 0px 5px grey;
-    border-radius: 3%;
+    box-shadow: 0px 0px 3px grey;
+    border-radius: 10px;
     padding: 10px 30px 30px 30px;
     user-select: none;
     background-color: white;
@@ -43,8 +42,8 @@ textarea{
 }
 
 textarea:focus{
-    border-color: #1D2B53;
-    box-shadow: 0px 0px 5px #1D2B53;
+    border-color: #222831;
+    box-shadow: 0px 0px 3px #222831;
 }
 
 .description{
@@ -58,10 +57,10 @@ label{
 
 .submit-button{
     background-color: transparent;
-    border: 1px solid #1D2B53;
+    border: 1px solid #222831;
     display: inline-block;
     font-weight: 400;
-    color: #1D2B53;
+    color: #222831;
     text-align: center;
     vertical-align: middle;
     user-select: none;
@@ -74,7 +73,7 @@ label{
 }
 
 .submit-button:hover{
-    background-color: #1D2B53;
+    background-color: #222831;
     color: white;
     cursor: pointer;
 }
