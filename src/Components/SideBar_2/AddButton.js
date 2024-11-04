@@ -34,15 +34,15 @@ function AddButton(props){
 function ArrowButton(props){
 
     function showAndHide_m(){
-        props.toggleVisibility_m(true)
+        //props.toggleVisibility_m(true)
     }
 
     function showAndHide_f(){
-        props.toggleVisibility_f(true)
+        //props.toggleVisibility_f(true)
     }
 
     function showAndHide_uc(){
-        props.toggleVisibility_uc(true)
+        //props.toggleVisibility_uc(true)
     }
 
     if(props.type==="show_p"){
