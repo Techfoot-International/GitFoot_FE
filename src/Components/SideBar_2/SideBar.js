@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import Logo from '../DumbComponents/Settings/Logo.js';
 import Table from '../DataFetchComponents/Table/Product_Table.js'
 import Form from '../DumbComponents/Form/Form.js';
 //import DetailBox from "../DataFetchComponents/Detail/DetailBox.js"
 import "./SideBar.css"
 import SideBar_Tab from './SideBar_Tab.js';
+import NavBar from "../DumbComponents/NavBar/NavBar.js";
 import All_Tabs from './All_Tabs.js'
 import Data from '../MockStore/storeIn.js';
 //import Data from '../MockStore/MockData.js';
@@ -64,9 +66,11 @@ function SideBar(){
     <Router>
     <div className='grid-two-col'>
         <div className='grid-items item1'>
-            <div className='mockSideBar'></div>
+    
+                <NavBar/>
             <div id='sideBar'>
                 <div className='flexBox'>
+                    <Logo/>
                     <SideBar_Tab key={"first_tab"}
                                  tabName={"Products"}
                                  tab_type={"all_products"}
@@ -81,6 +85,7 @@ function SideBar(){
                     </Routes>
 
                 </div>
+                
             </div>
         </div>
         <div className='grid-items item2'>

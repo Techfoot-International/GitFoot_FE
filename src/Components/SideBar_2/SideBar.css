@@ -5,30 +5,27 @@
     height: 100vh;
     display: grid;
     gap: 10px;
-    grid-template-columns: 1fr 4fr;
+    grid-template-columns: 275px auto;
     background-color: transparent;
     user-select: none;
 }
 
 .item2{
-    padding-top: 9%;
-    padding-bottom: 9%;
+    
 }
 
-.mockSideBar{
-    width: 240px;
-}
+
 #sideBar{
     position: fixed;
     top: 0;
-    left: 0;
+    left: 45px;
     width: 260px;
     height: 100vh;
-    padding-top: 25px;
+    /*padding-top: 25px;*/
     background-color: #FBF9F1;
-    box-shadow: 0px 0px 3px grey;
+    box-shadow: 1px 0px 3px #9B7EBD;
     align-items: center;
-    z-index: 1;
+    z-index: 11;
 }
 
 .flexBox{

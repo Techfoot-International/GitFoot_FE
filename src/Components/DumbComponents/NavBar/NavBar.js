@@ -1,26 +1,28 @@
 import "./NavBar.css"
-//import logo from "./wolf2.png"
-//import logo from "./logo.png"
-//import logo from "./logo.svg"
+import { ReactComponent as  LoginIcon} from "../Login/login.svg"
+import { ReactComponent as  SettingsIcon} from "../Settings/settings.svg"
 
 function NavBar(){
     return <nav>
-            <div className="div-grid">
-                <div className="grid-item grid-logo">
-                    <div id="box">
-                        <img/>
+                <div className="flexBox_navBar">
+                    <div className="flexItem_navBar logo_navBar">
+                            
                     </div>
+
+                    <div className="flexItem_navBar middleFlexItem_navBar">
+
+                    </div>
+
+                    <div className="flexItem_navBar settings_navBar">
+                        <div className="subFlexItems_navBar">
+                            <LoginIcon width="30px" height="30px" fill="white"/>
+                        </div>
+                        <div className="subFlexItems_navBar">
+                            <SettingsIcon width="30px" height="30px" fill="white"/>
+                        </div> 
+                    </div>
+                   
                 </div>
-                <div className="grid-item"></div>
-                <div className="div-flex2 grid-item">
-                    <div className="flex2-item">
-                        <a>Sign-In</a>
-                    </div>
-                    <div className="flex2-item">
-                        <a>Sign-Up</a>
-                    </div>
-                </div>
-            </div>
             </nav>
 }
 export default NavBar;
