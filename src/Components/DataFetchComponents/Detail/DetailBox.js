@@ -2,7 +2,7 @@ import "./Detail.css"
 import React from "react"
 
 function DetailBox(props){ 
-    
+    console.log("I'm DetailBOx ",props.detail)
     const keys=Object.keys(props.detail)
 
     if(keys.length===0){

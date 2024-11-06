@@ -105,7 +105,7 @@ const obj={
 
 
 export default {
-    
+    obj,
     getAllProducts : async function(){
         return Promise.resolve(obj)
     },//getAllProducts

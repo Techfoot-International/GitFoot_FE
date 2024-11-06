@@ -22,7 +22,8 @@ function All_Tabs(props){
                 setModule(productData.module);
             }
             catch(error){
-                console.error(error)
+                //console.error(error)
+                console.log("this is an error coming from All_Tabs.js")
             }
             
         }
@@ -32,13 +33,12 @@ function All_Tabs(props){
     if (!module || module.length === 0) {
         return null; // or some loading indicator
     }
-    console.log("All_Tabs.js ",props.product_id);
-    
+
     var prod_arr=[<SideBar_Tab  key={`product No. ${props.product_id}`}
                                 tracking_id={{p_id: props.product_id}}
                                 tracking_id_func={props.tracking_id_func}
                                 tabName={props.product_name}
-                                tab_type={"one_product"}/>
+                                tabType={"one_product"}/>
                 ]//prod_arr
     var mod_arr=[]
     var feat_arr=[]
@@ -46,27 +46,26 @@ function All_Tabs(props){
 
 
     for (let i = 0; i < module.length; i++) {
-        
-        mod_arr.push(<SideBar_Tab   key={`${i}`}
+        mod_arr.push(<SideBar_Tab   key={`module No. ${i}`}
                                     tracking_id={{p_id:props.product_id, m_id:i}}
                                     tracking_id_func={props.tracking_id_func}
                                     tabName={module[i].name}
-                                    tab_type={"module"}
+                                    tabType={"module"}
                                     module_id={i}/>)
 
         for (let x = 0; x < module[i].feature.length; x++) {
 
-            feat_arr.push(<SideBar_Tab  key={`${i}-${x}`}
+            feat_arr.push(<SideBar_Tab  key={`feature No. ${i}-${x}`}
                                         tracking_id={{p_id:props.product_id, m_id:i, f_id:x}}
                                         tracking_id_func={props.tracking_id_func}
                                         tabName={module[i].feature[x].name}
-                                        tab_type={"feature"}
+                                        tabType={"feature"}
                                         feature_id={x}/>)
 
             for (let s = 0; s < module[i].feature[x].useCase.length; s++) {
                 
-                us_arr.push(<SideBar_Tab    key={`${i}-${x}-${s}`}
-                                            tab_type={"useCase"}
+                us_arr.push(<SideBar_Tab    key={`useCase No. ${i}-${x}-${s}`}
+                                            tabType={"useCase"}
                                             tabName={module[i].feature[x].useCase[s].name}
                                             useCase_id={s}/>)
                 
