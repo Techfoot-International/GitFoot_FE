@@ -15,4 +15,3 @@ function App() {
 }
 export default App;
 //<NavBar/>
-//<Product_Table content={JSON.parse(localStorage.getItem("product"))}/>
