@@ -1,5 +1,8 @@
 #module_div{
     padding-left: 25px;
+    padding: 15px;
+    height: 100%;
+    overflow: auto;
 }
 
 #feature_div{

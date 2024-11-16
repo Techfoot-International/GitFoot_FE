@@ -10,21 +10,20 @@ import SideBar_Tab from './SideBar_Tab.js';
 import NavBar from "../DumbComponents/NavBar/NavBar.js";
 import All_Tabs from './All_Tabs.js'
 import Data from '../MockStore/storeIn.js';
+import DetailBox from '../DataFetchComponents/Detail/DetailBox.js';
 //import Data from '../MockStore/MockData.js';
 //import Data from '../MockStore/storeInBrowser.js';
 
 
 function SideBar(){
 
-    const [product_length, setProduct_length] = useState(0)
+    const [num_of_Products, set_num_of_Products] = useState(0)
     const [AllProducts, setAllProducts] = useState(null)
     const [is_it_true, set_is_it_true] = useState(true)
 
-    const [specificPro, setSpecificPro]= useState(JSON.parse(localStorage.getItem('product')))
+    const [specificPro, setSpecificPro]= useState(null)
     const [identity, setIdentity]=useState(null)
 
-    console.log("this is coming from SideBar.js",specificPro.id)////////////////////////////////////////////
-    console.log("this is coming from SideBar.js",specificPro.name)////////////////////////////////
 
     function Tracking_ID(id){
         setIdentity(id)
@@ -39,7 +38,7 @@ function SideBar(){
     }
 
     useEffect(() => {
-        if(is_it_true){
+        if(true){
             async function fetchData(){
                 try{
                     setAllProducts((await Data.getAllProducts()).product)
@@ -47,17 +46,14 @@ function SideBar(){
                 catch(error){
                     console.error(error)
                 }
-                finally{
-                    set_is_it_true(false)
-                }
             }
             fetchData()//calling returnData()
         }
         if (AllProducts !== null) {
-            setProduct_length(AllProducts.length)
+            set_num_of_Products(AllProducts.length)
         }
 
-    },[is_it_true])
+    },[])
     
 
 
@@ -73,12 +69,12 @@ function SideBar(){
                     <Logo/>
                     <SideBar_Tab key={"first_tab"}
                                  tabName={"Products"}
-                                 tab_type={"all_products"}
-                                 tracking_id={product_length}
+                                 tabType={"all_products"}
+                                 tracking_id={num_of_Products}
                                  tracking_id_func={Tracking_ID}/>
                     <Routes>
-                                
-                         {specificPro ? <Route exact path='/Product' element={<All_Tabs key={"@T"}
+                        
+                         {specificPro ? <Route exact path='/Product' element={<All_Tabs key={"I'mAllTabs"}
                                                                                         product_id={specificPro.id}
                                                                                         product_name={specificPro.name}
                                                                                         tracking_id_func={Tracking_ID}/>}/> : <Route path='/Product' element={<Navigate to="/" />} />}
@@ -96,6 +92,11 @@ function SideBar(){
                 <Route path="/add_module" element={<Form type={"module"} tracking_id={identity} fetchData={fetchData_func}/>}/>
                 <Route path="/add_feature" element={<Form type={"feature"} tracking_id={identity} fetchData={fetchData_func}/>}/>
                 <Route path="/add_useCase" element={<Form type={"useCase"} tracking_id={identity} fetchData={fetchData_func}/>}/>
+                {specificPro ? (
+        <Route path="/Product" element={<DetailBox detail={SpecificPro} />} />
+    ) : (
+        <Route path="/Product" element={<Navigate to="/" />} />
+    )}
             </Routes>  
         </div>
     </div>

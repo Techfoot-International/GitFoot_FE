@@ -1,6 +1,6 @@
 table{
     text-align: left;
-    width: 900px;
+    width: 100%;
     margin-bottom: 1rem;
     background-color: white;
     border-collapse: collapse;
@@ -30,12 +30,12 @@ thead tr th{
 tbody tr {
     padding: 0.75rem;
     vertical-align: top;
-    border-top: 1px solid #dee2e6;
+    border-top: 1px solid #EEEEEE;
     box-sizing: border-box;
 }
 
 tbody :hover {
-    background-color: #dee2e6;
+    background-color: #EEEEEE;
     cursor: pointer;
 }
 
@@ -51,4 +51,7 @@ tbody tr td {
     width: 20px;
 }
 
-  
+.responsiveTableDiv{
+    width: 900px;
+    background-color: transparent
+}

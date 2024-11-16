@@ -5,7 +5,7 @@ function AddButton(props){
 
     function clickMe(){
         props.tracking_id_func(props.tracking_id)
-        console.log("i'm the error")
+        console.log("clickMe Function")
         //console.log(props.tracking_id)
     }
 

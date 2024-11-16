@@ -1,6 +1,6 @@
 import "./Table.css"
 import React from "react";
-import RowsAndData from "./RowsAndData1.js";
+import RowsAndData from "./RowsAndData.js";
 
 const Product_Table = (props) => {
 
@@ -15,18 +15,21 @@ const Product_Table = (props) => {
   }
 
   return (
-    <table>
-      <thead>
-        <tr>
-            <th className="th-td">#</th>
-            <th>Name</th>
-            <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-      {<RowsAndData content={props.content} showDetailHandler={props.showDetailHandler} specificPro={props.specificPro}/>}
-      </tbody>
-    </table>
+    <div className="responsiveTableDiv">
+        <table>
+        <thead>
+          <tr>
+              <th className="th-td">#</th>
+              <th>Name</th>
+              <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+        {<RowsAndData content={props.content} showDetailHandler={props.showDetailHandler} specificPro={props.specificPro}/>}
+        </tbody>
+      </table>
+    </div>
+    
   );
 };
 
